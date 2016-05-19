@@ -1,3 +1,7 @@
+deb
+rpm
+package
+
 # IDE Artifacts
 .metadata
 .build
