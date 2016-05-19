@@ -1,0 +1,18 @@
+Source: aws-sdk-cpp
+Section: net
+Priority: optional
+Maintainer: onedata Package Maintainer <support@onedata.org>
+Build-Depends:
+    cmake (>= 3.0.0),
+    debhelper (>= 9),
+    g++ (>= 4.9.0),
+    git,
+    libcurl4-openssl-dev,
+    libssl-dev
+Standards-Version: 3.9.5
+Homepage: https://onedata.org
+
+Package: aws-sdk-cpp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: AWS SDK for C++

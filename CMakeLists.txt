@@ -696,7 +696,7 @@ elseif(PLATFORM_LINUX OR PLATFORM_ANDROID OR PLATFORM_APPLE)
 endif()
 
 if(NOT PLATFORM_WINDOWS)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-rtti")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions")
     if(MINIMIZE_SIZE)
         set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
     endif()
