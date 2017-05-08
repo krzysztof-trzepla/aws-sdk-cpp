@@ -53,6 +53,11 @@ namespace Aws
             static ByteBuffer HexDecode(const Aws::String& str);
 
             /**
+            * Calculates a SHA1 HMAC digest (not hex encoded)
+            */
+            static ByteBuffer CalculateSHA1HMAC(const ByteBuffer& toSign, const ByteBuffer& secret);
+
+            /**
             * Calculates a SHA256 HMAC digest (not hex encoded)
             */
             static ByteBuffer CalculateSHA256HMAC(const ByteBuffer& toSign, const ByteBuffer& secret);
