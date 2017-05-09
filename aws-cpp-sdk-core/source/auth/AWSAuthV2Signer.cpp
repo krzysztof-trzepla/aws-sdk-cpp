@@ -59,16 +59,6 @@ static Http::HeaderValueCollection CanonicalizeHeaders(Http::HeaderValueCollecti
 
 AWSAuthV2Signer::AWSAuthV2Signer(const std::shared_ptr<Auth::AWSCredentialsProvider>& credentialsProvider) :
     m_credentialsProvider(credentialsProvider),
-    m_acceptedQueryStrings({"?acl", "?cors", "?delete", "?lifecycle", "?location",
-                "?logging", "?notification", "?partnumber", "?policy",
-                "?response-content-disposition",
-                "?response-content-type",
-                "?response-content-encoding",
-                "?response-content-language",
-                "?response-cache-control", "?response-expires",
-                "?requestpayment", "?tagging", "?torrent", "?uploadid",
-                "?uploads", "?versionid", "?versioning", "?versions",
-                "?website"}),
     m_HMAC(Aws::MakeUnique<Aws::Utils::Crypto::Sha1HMAC>(v2LogTag))
 {
 }
@@ -139,8 +129,7 @@ bool AWSAuthV2Signer::Sign(Aws::Http::HttpRequest& request, long long expires) c
     URI uriCpy = request.GetUri();
     signingStringStream << uriCpy.GetURLEncodedPath();
     Aws::String queryString = uriCpy.GetQueryString();
-    if (queryString.length() > 0 &&
-        m_acceptedQueryStrings.find(queryString) != m_acceptedQueryStrings.cend())
+    if (queryString.length())
     {
         signingStringStream << queryString;
     }

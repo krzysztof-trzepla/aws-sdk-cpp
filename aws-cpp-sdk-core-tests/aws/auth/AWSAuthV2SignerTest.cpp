@@ -135,11 +135,6 @@ TEST(AWSAuthV2SignerTest, GetQueryString)
     RunV2TestCase("get-query-string");
 }
 
-TEST(AWSAuthV2SignerTest, GetQueryStringUnknown)
-{
-    RunV2TestCase("get-query-string-unknown");
-}
-
 TEST(AWSAuthV2SignerTest, GetCustomXAMZ)
 {
     RunV2TestCase("get-custom-x-amz");
