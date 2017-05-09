@@ -436,7 +436,7 @@ namespace
         CreateBucketRequest createBucketRequest;
         createBucketRequest.SetBucket(fullBucketName);
         CreateBucketConfiguration bucketConfiguration;
-        bucketConfiguration.SetLocationConstraint(BucketLocationConstraint::us_west_2);
+        bucketConfiguration.SetLocationConstraint(BucketLocationConstraint::exo_ch_dk2);
         createBucketRequest.SetCreateBucketConfiguration(bucketConfiguration);
 
         CreateBucketOutcome createBucketOutcome = oregonClient->CreateBucket(createBucketRequest);
@@ -449,7 +449,7 @@ namespace
         locationRequest.SetBucket(fullBucketName);
         auto locationOutcome = oregonClient->GetBucketLocation(locationRequest);
         ASSERT_TRUE(locationOutcome.IsSuccess());
-        ASSERT_EQ(locationOutcome.GetResult().GetLocationConstraint(), BucketLocationConstraint::us_west_2);
+        ASSERT_EQ(locationOutcome.GetResult().GetLocationConstraint(), BucketLocationConstraint::exo_ch_dk2);
 
         DeleteBucketRequest deleteBucketRequest;
         deleteBucketRequest.SetBucket(fullBucketName);

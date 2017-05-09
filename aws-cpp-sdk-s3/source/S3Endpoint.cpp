@@ -37,6 +37,7 @@ namespace S3Endpoint
   static const int SA_EAST_1_HASH = Aws::Utils::HashingUtils::HashString("sa-east-1");
   static const int US_GOV_WEST_1_HASH = Aws::Utils::HashingUtils::HashString("us-gov-west-1");
   static const int FIPS_US_GOV_WEST_1_HASH = Aws::Utils::HashingUtils::HashString("fips-us-gov-west-1");
+  static const int EXO_CH_DK2_HASH = Aws::Utils::HashingUtils::HashString("exo-ch-dk2");
 
   Aws::String ForRegion(const Aws::String& regionName, bool useDualStack)
   {
@@ -83,6 +84,10 @@ namespace S3Endpoint
       else if(hash == FIPS_US_GOV_WEST_1_HASH)
       {
         return "s3-fips-us-gov-west-1.amazonaws.com";
+      }
+      else if (hash == EXO_CH_DK2_HASH)
+      {
+        return "sos.exo.io";
       }
     }
     Aws::StringStream ss;

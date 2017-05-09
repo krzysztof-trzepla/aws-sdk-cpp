@@ -40,6 +40,7 @@ namespace Aws
         static const int sa_east_1_HASH = HashingUtils::HashString("sa-east-1");
         static const int cn_north_1_HASH = HashingUtils::HashString("cn-north-1");
         static const int eu_central_1_HASH = HashingUtils::HashString("eu-central-1");
+        static const int exo_ch_dk2_HASH = HashingUtils::HashString("CH-DK-2");
 
 
         BucketLocationConstraint GetBucketLocationConstraintForName(const Aws::String& name)
@@ -89,6 +90,10 @@ namespace Aws
           {
             return BucketLocationConstraint::eu_central_1;
           }
+          else if (hashCode == exo_ch_dk2_HASH)
+          {
+            return BucketLocationConstraint::exo_ch_dk2;
+          }
           EnumParseOverflowContainer* overflowContainer = Aws::GetEnumOverflowContainer();
           if(overflowContainer)
           {
@@ -125,6 +130,8 @@ namespace Aws
             return "cn-north-1";
           case BucketLocationConstraint::eu_central_1:
             return "eu-central-1";
+          case BucketLocationConstraint::exo_ch_dk2:
+            return "CH-DK-2";
           default:
             EnumParseOverflowContainer* overflowContainer = Aws::GetEnumOverflowContainer();
             if(overflowContainer)
