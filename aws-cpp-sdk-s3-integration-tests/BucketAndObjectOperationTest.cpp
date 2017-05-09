@@ -103,7 +103,7 @@ namespace
 
             // Create a client
             ClientConfiguration config;
-            config.region = Aws::Region::US_EAST_1;
+            config.region = Aws::Region::EXO_CH_DK2;
             config.scheme = Scheme::HTTPS;
             config.connectTimeoutMs = 30000;
             config.requestTimeoutMs = 30000;
@@ -119,8 +119,8 @@ namespace
             }
 
             Client = Aws::MakeShared<S3Client>(ALLOCATION_TAG, Aws::MakeShared<DefaultAWSCredentialsProviderChain>(ALLOCATION_TAG), config, false);
-            config.region = Aws::Region::US_WEST_2;
-            config.useDualStack = true;
+            config.region = Aws::Region::EXO_CH_DK2;
+            config.useDualStack = false;
             oregonClient = Aws::MakeShared<S3Client>(ALLOCATION_TAG, Aws::MakeShared<DefaultAWSCredentialsProviderChain>(ALLOCATION_TAG), config, false);
             m_HttpClient = Aws::Http::CreateHttpClient(config);
         }
@@ -655,7 +655,6 @@ namespace
         Aws::StringStream intConverter;
         intConverter << objectStream->tellp();
         putRequest->SetContentLength(intConverter.str());
-        putRequest->SetContentType("text/plain");
         std::shared_ptr<HttpResponse> putResponse = m_HttpClient->MakeRequest(*putRequest);
 
         ASSERT_EQ(HttpResponseCode::OK, putResponse->GetResponseCode());
