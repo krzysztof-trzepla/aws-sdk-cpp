@@ -41,6 +41,7 @@ namespace Aws
         {
             class Sha256;
             class Sha256HMAC;
+            class Sha1HMAC;
         } // namespace Crypto
     } // namespace Utils
 
@@ -183,6 +184,55 @@ namespace Aws
             mutable std::mutex m_partialSignatureLock;
             bool m_signPayloads;
             bool m_urlEscapePath;
+        };
+
+        /**
+         * AWS Auth v2 Signer implementation of the AWSAuthSigner interface (for S3 only).
+         */
+        class AWS_CORE_API AWSAuthV2Signer : public AWSAuthSigner
+        {
+
+        public:
+            AWSAuthV2Signer(const std::shared_ptr<Auth::AWSCredentialsProvider>& credentialsProvider);
+            virtual ~AWSAuthV2Signer();
+
+            /**
+            * Signs the request itself based on info in the request and uri.
+            * Uses AWS Auth V2 signing method with SHA1 HMAC algorithm.
+            */
+            bool SignRequest(Aws::Http::HttpRequest& request) const override;
+
+            /**
+            * Takes a request and signs the URI based on the HttpMethod, URI and other info from the request.
+            * The URI can then be used in a normal HTTP call until expiration.
+            * Uses AWS Auth V2 signing method with SHA1 HMAC algorithm.
+            * expirationInSeconds defaults to 0 which provides a URI good for 7 days.
+            */
+            bool PresignRequest(Aws::Http::HttpRequest& request, long long expirationInSeconds = 0) const override;
+
+            /**
+            * Takes a request and signs the URI based on the HttpMethod, URI and other info from the request.
+            * The URI can then be used in a normal HTTP call until expiration.
+            * Uses AWS Auth V2 signing method with SHA1 HMAC algorithm.
+            * expirationInSeconds defaults to 0 which provides a URI good for 7 days.
+            */
+            bool PresignRequest(Aws::Http::HttpRequest& request, const char* region, long long expirationInSeconds = 0) const override;
+
+            /**
+            * Takes a request and signs the URI based on the HttpMethod, URI and other info from the request.
+            * The URI can then be used in a normal HTTP call until expiration.
+            * Uses AWS Auth V2 signing method with SHA1 HMAC algorithm.
+            * expirationInSeconds defaults to 0 which provides a URI good for 7 days.
+            */
+            bool PresignRequest(Aws::Http::HttpRequest& request, const char* region, const char* serviceName, long long expirationInSeconds = 0) const override;
+
+        private:
+            bool ShouldSignHeader(const Aws::String& header) const;
+            bool Sign(Aws::Http::HttpRequest& request, long long expires) const;
+
+            std::shared_ptr<Auth::AWSCredentialsProvider> m_credentialsProvider;
+            Aws::Set<Aws::String> m_acceptedQueryStrings;
+            Aws::UniquePtr<Aws::Utils::Crypto::Sha1HMAC> m_HMAC;
         };
 
     } // namespace Client
