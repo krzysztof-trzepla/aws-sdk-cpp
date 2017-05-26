@@ -70,7 +70,7 @@ namespace Aws
             unsigned maxConnections;
             /**
              * Socket read timeouts. Default 3000 ms. This should be more than adequate for most services. However, if you are transfering large amounts of data
-             * or are worried about higher latencies, you should set to something that makes more sense for your use case. 
+             * or are worried about higher latencies, you should set to something that makes more sense for your use case.
              */
             long requestTimeoutMs;
             /**
@@ -138,9 +138,11 @@ namespace Aws
              * If set to true the http stack will follow 300 redirect codes.
              */
             bool followRedirects;
+            /**
+             * Use signature version 2.
+             */
+            bool useSigV2 = false;
         };
 
     } // namespace Client
 } // namespace Aws
-
-
